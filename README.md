@@ -1,39 +1,9 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Railway Platform Announcement System (MUG) - Version 1.0</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      line-height: 1.6;
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 20px;
-    }
-    h1 {
-      text-align: center;
-    }
-    h2 {
-      text-align: center;
-    }
-    img {
-      display: block;
-      margin: 0 auto;
-      width: 150px;
-    }
-    ul {
-      list-style-type: disc;
-      padding-left: 20px;
-    }
-    p {
-      text-align: justify;
-    }
-  </style>
-</head>
 <body>
   <h1>Railway Platform Announcement System (MUG) - Version 1.0</h1>
   <h2>Created by: Diptanu Roy</h2>
-  <img src="train_image.png" alt="Train Image">
+  <img src="RPA.ico">
   <p>This program is a Railway Platform Announcement System (MUG) that provides real-time train information, including train numbers, names, arrival times, platforms, and remarks. The system is designed to display train announcements for the current time range, allowing users to select languages and view train status.</p>
 
   <h2>Features:</h2>
