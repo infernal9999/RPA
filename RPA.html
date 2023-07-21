@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Railway Platform Announcement</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="RPA.ico" type="image/x-icon">
+</head>
+<body>
+    <div id="clockContainer"></div>
+    <div class="header-container">
+        <div class="header-icon"></div>
+        <h3>Railway Platform Announcement System (MUG)</h3>
+    </div>
+    <div>
+        <label for="fromTimeInput">From Time:</label>
+        <input type="time" id="fromTimeInput">
+        <label for="toTimeInput">To Time:</label>
+        <input type="time" id="toTimeInput">
+        <button id="loadGridButton">Load Grid</button>
+    </div>
+
+    <div id="announcementContainer">
+        <!-- Announcement displays will be added here -->
+    </div>
+
+    <div>
+        <button id="playButton">Play</button>
+    </div>
+
+    <div id="selectedRowsContainer">
+        <!-- Selected rows information will be displayed here -->
+    </div>
+	
+	<script src="data.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
