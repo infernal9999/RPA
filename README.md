@@ -1,11 +1,10 @@
-
 *** Railway Platform Announcement System (MUG) - Version 1.0 ***
                                       *** Created by: Diptanu Roy ***
 
 
     This program is a Railway Platform Announcement System (MUG) that provides real-time train information, including train numbers, names, arival times, platforms, and remarks. The system is designed to display train announcements for the current time range, allowing users to select languages and view train status.
 
-# Features:
+* Features:
   -- Real-time train announcements.
   -- Language selection for announcements.
   -- Train status and platform number selection.
