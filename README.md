@@ -1,5 +1,5 @@
-*** Railway Platform Announcement System (MUG) - Version 1.0 ***
 
+*** Railway Platform Announcement System (MUG) - Version 1.0 ***
                                       *** Created by: Diptanu Roy ***
 
 
