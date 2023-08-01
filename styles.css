@@ -9,6 +9,20 @@ body {
     background-color: #ffd700;
 }
 
+.container {
+    max-width: 900px;
+    width: 100%;
+    overflow-y: auto; /* Add scrollbar for the container */
+    max-height: calc(100vh - 340px); /* Adjust the height to accommodate other elements without scrolling */
+}
+
+#announcementContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-bottom: 20px; /* Add padding at the bottom for better spacing */
+}
+
 #clockContainer {
     position: absolute;
     top: 20px;
@@ -64,17 +78,6 @@ button {
 
 #loadGridButton {
     background-color: #2196F3;
-}
-
-.container {
-    max-width: 900px;
-    width: 100%;
-}
-
-#announcementContainer {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
 }
 
 .announcement {
