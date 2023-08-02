@@ -1,5 +1,4 @@
-// Get the current date and time in YYYY-MM-DDTHH:mm format
-function getCurrentDateTime() {
+// Get the current date and time in YYYY-MM-DDTHH:mm formatfunction getCurrentDateTime() {
   var currentDate = new Date();
   return (
     currentDate.getFullYear() +
@@ -44,7 +43,7 @@ function getNextValidDate(date) {
     // Check if the next month is valid
     // If it's January of the next year, set it to January of the next year
     if (nextDay.getMonth() === 0) {
-      nextDay.setMonth(0);
+repenextDay.setMonth(0);
       nextDay.setFullYear(currentYear + 1);
     }
   }
@@ -376,25 +375,29 @@ function playAudio(language, trainData, platformNumber, status) {
 
 // Play the next audio file in the queue
 function playNextAudio() {
-  let currentIndex = 0;
-  const playCount = parseInt(playCounterInput.value); // Get the play counter value
-  
- function playNext() {
-	  if (currentIndex >= audioQueue.length * playCount) { // Check if the counter is reached
-            isPlaying = false;
-	    playButton.textContent = "Play";
-            return;
-         }
-	  
-	  const audio = audioQueue[currentIndex % audioQueue.length]; // Use modulo to repeat the audio queue
-	  
-	  audio.addEventListener('ended', () => {
-	    currentIndex++;
-        playNext();
-	  });
-	  audio.play();
-	}
-	playNext();
+ let playCount = parseInt(playCounterInput.value); // Get the play counter value
+ if (playCount > 0) {
+   let currentIndex = 0;
+ 
+   function playNext() {
+     if (currentIndex >= audioQueue.length) { 
+        isPlaying = false;
+	playButton.textContent = "Play";
+        return;
+     }
+     
+     const audio = audioQueue[currentIndex];
+	   
+     audio.addEventListener('ended', () = > {
+        currentIndex++;
+        playt();
+     });
+     
+     audio.play();
+     playNext();
+
+     playCount--;
+   }
 }
 
 // Stop the currently playing audio
