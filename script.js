@@ -388,7 +388,7 @@ function playNextAudio() {
      
      const audio = audioQueue[currentIndex];
 	   
-     audio.addEventListener('ended', () = > {
+     audio.addEventListener('ended', () => {
         currentIndex++;
         playNext();
      });
