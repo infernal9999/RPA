@@ -390,14 +390,16 @@ function playNextAudio() {
 	   
      audio.addEventListener('ended', () = > {
         currentIndex++;
-        playt();
+        playNext();
      });
+	 
      
      audio.play();
-     playNext();
-
-     playCount--;
    }
+    playNext();
+
+    playCount--;
+  }
 }
 
 // Stop the currently playing audio
