@@ -232,10 +232,12 @@ function displaySelectedRows() {
   }
 }
 
+let playCounterInput; // Declare the play counter input variable
 let audioQueue = [];
 // Toggle play/stop audio functionality
 function togglePlay() {
   if (!isPlaying) {
+    playCounterInput = document.getElementById("playCounterInput"); // Get the play counter input element
     playButton.textContent = "Stop";
     isPlaying = true;
    audioQueue = [];
@@ -375,15 +377,16 @@ function playAudio(language, trainData, platformNumber, status) {
 // Play the next audio file in the queue
 function playNextAudio() {
   let currentIndex = 0;
+  const playCount = parseInt(playCounterInput.value); // Get the play counter value
   
  function playNext() {
-	  if (currentIndex >= audioQueue.length) {
-		isPlaying = false;
-		playButton.textContent = "Play";
-        return;
-      }
+	  if (currentIndex >= audioQueue.length * playCount) { // Check if the counter is reached
+            isPlaying = false;
+	    playButton.textContent = "Play";
+            return;
+         }
 	  
-	  const audio = audioQueue[currentIndex];
+	  const audio = audioQueue[currentIndex % audioQueue.length]; // Use modulo to repeat the audio queue
 	  
 	  audio.addEventListener('ended', () => {
 	    currentIndex++;
