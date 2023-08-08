@@ -377,7 +377,7 @@ function playAudio(language, trainData, platformNumber, status) {
 // Play the next audio file in the queue
 function playNextAudio() {
  let playCount = parseInt(playCounterInput.value); // Get the play counter value
- while (playCount > 0) {
+ for (let i = 0; i < playCount; i++) {
    let currentIndex = 0;
  
    function playNext() {
@@ -398,8 +398,6 @@ function playNextAudio() {
      audio.play();
    }
     playNext();
-
-    playCount--;
   }
 }
 
