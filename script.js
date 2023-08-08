@@ -1,4 +1,5 @@
-// Get the current date and time in YYYY-MM-DDTHH:mm formatfunction getCurrentDateTime() {
+// Get the current date and time in YYYY-MM-DDTHH:mm format
+function getCurrentDateTime() {
   var currentDate = new Date();
   return (
     currentDate.getFullYear() +
