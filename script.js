@@ -234,6 +234,7 @@ function displaySelectedRows() {
 
 let playCounterInput; // Declare the play counter input variable
 let audioQueue = [];
+
 // Toggle play/stop audio functionality
 function togglePlay() {
   if (!isPlaying) {
@@ -261,11 +262,11 @@ function togglePlay() {
           "statusSelect_" + trainNo
         );
         var selectedStatus = statusSelect.value;
-
+        audioQueue.push(new Audio(`audio_data/alert.mp3`));
         if (selectedLanguage === "All") {
           playAudio("English", trainData, platformNumber, selectedStatus);
-		  playAudio("Hindi", trainData, platformNumber, selectedStatus);
-		  playAudio("Bengali", trainData, platformNumber, selectedStatus);
+          playAudio("Hindi", trainData, platformNumber, selectedStatus);
+          playAudio("Bengali", trainData, platformNumber, selectedStatus);
         } else {
           playAudio(
             selectedLanguage,
@@ -276,7 +277,7 @@ function togglePlay() {
         }
       }
     });
-	playNextAudio();
+  playNextAudio();
   } else {
     stopAudio();
   }
@@ -295,12 +296,7 @@ function getLanguagePath(language) {
   }
 }
 
-function constructAudioFileName(
-  language,
-  trainData,
-  platformNumber,
-  status
-) {
+function constructAudioFileName(language, trainData, platformNumber, status) {
   var audioLanguagePath = getLanguagePath(language);
   var audioPath = `audio_data/${audioLanguagePath}`;
 
@@ -336,10 +332,10 @@ function constructAudioFileName(
     }
     if (audioLanguagePath === "hi") {
       audioFileNameArray.push(`${audioPath}/status/arriving_pt1.mp3`);
-	  audioFileNameArray.push(
-        `${audioPath}/numbers/${platformNumber}.mp3`
-      );
-	  audioFileNameArray.push(`${audioPath}/status/arriving_pt2.mp3`);
+      audioFileNameArray.push(
+          `${audioPath}/numbers/${platformNumber}.mp3`
+        );
+      audioFileNameArray.push(`${audioPath}/status/arriving_pt2.mp3`);
     } else {
       if (audioLanguagePath === "bn") {
         audioFileNameArray.push(
@@ -376,29 +372,37 @@ function playAudio(language, trainData, platformNumber, status) {
 
 // Play the next audio file in the queue
 function playNextAudio() {
- let playCount = parseInt(playCounterInput.value); // Get the play counter value
- for (let i = 0; i < playCount; i++) {
-   let currentIndex = 0;
- 
-   function playNext() {
-     if (currentIndex >= audioQueue.length) { 
-        isPlaying = false;
-	playButton.textContent = "Play";
-        return;
-     }
-     
-     const audio = audioQueue[currentIndex];
-	   
-     audio.addEventListener('ended', () => {
-        currentIndex++;
-        playNext();
-     });
-	 
-     
-     audio.play();
-   }
+    let currentIndex = 0;
+    let currentPlayCount = 0;
+    const playCount = parseInt(playCounterInput.value); // Get the play counter value
+
+    function playNext() {
+        if (currentIndex == audioQueue.length) {
+            currentIndex = 0; // Reset currentIndex when all audio files have been played
+            currentPlayCount++;
+        }
+
+        if (currentPlayCount == playCount) {
+            isPlaying = false;
+            playButton.textContent = "Play";
+            currentIndex = 0; // Reset currentIndex
+            return;
+        }
+
+        const audio = audioQueue[currentIndex];
+
+        function handleEnded() {
+            audio.removeEventListener('ended', handleEnded);
+            currentIndex++;
+            playNext();
+        }
+
+        audio.addEventListener('ended', handleEnded);
+
+        audio.play();
+    }
+
     playNext();
-  }
 }
 
 // Stop the currently playing audio
@@ -410,10 +414,6 @@ function stopAudio() {
   isPlaying = false;
   playButton.textContent = "Play";
   audioQueue = [];
-  var audioBars = document.querySelectorAll(".audio-bar");
-  for (var i = 0; i < audioBars.length; i++) {
-    audioBars[i].remove();
-  }
 }
 
 let refreshIntervalId;
@@ -647,24 +647,84 @@ function updateClock() {
   clockContainer.textContent = "System Time: " + currentTimeString;
 }
 
+// Function to load selected trains based on user input
+function loadSelectedTrains() {
+    const trainNumbersInput = loadTrainInput.value.trim(); // Remove leading and trailing whitespace
+    if (trainNumbersInput === "") {
+        alert("Please enter at least one train number.");
+        return;
+    }
+
+    const trainNumbers = trainNumbersInput.split(",").map(number => number.trim());
+
+    const validTrains = [];
+    const invalidTrains = [];
+
+    // Filter and identify valid train numbers
+    for (let i = 0; i < data.length; i++) {
+        const train = data[i];
+        if (trainNumbers.includes(train["Train No."])) {
+            validTrains.push(train);
+        }
+    }
+
+    // Clear the containers first if any valid train is found
+    if (validTrains.length > 0) {
+      // Disable the interval by clearing it using the stored interval ID
+      clearInterval(refreshIntervalId);
+      
+      announcementContainer.innerHTML = "";
+      selectedRowsContainer.innerHTML = "";
+    }
+
+    // Create announcements and handle valid trains
+    for (const train of validTrains) {
+        createAnnouncement(train);
+        // Restore the state of combo boxes and checkboxes for the displayed train entry
+        restoreComboState(train);
+        restoreCheckboxState(train);
+        // Add event listeners to combo boxes and checkboxes to save their state when changed
+        addComboChangeListener(train);
+        addCheckboxChangeListener(train);
+        // Save the current state of combo boxes and checkboxes
+        saveComboState(train);
+        saveCheckboxState(train);
+    }
+
+    // Find invalid train numbers
+    for (const trainNumber of trainNumbers) {
+        if (!validTrains.some(train => train["Train No."] === trainNumber)) {
+            invalidTrains.push(trainNumber);
+        }
+    }
+
+    // Display invalid train numbers in a popup
+    if (invalidTrains.length > 0) {
+        alert(`Trains not found: ${invalidTrains.join(", ")}`);
+    }
+}
+
 // Main entry point when the page loads
 document.addEventListener("DOMContentLoaded", function () {
-  announcementContainer = document.getElementById("announcementContainer");
-  selectedRowsContainer = document.getElementById("selectedRowsContainer");
-  // Update the clock every second
-  setInterval(updateClock, 1000);
-  playButton = document.getElementById("playButton");
-  fromTimeInput = document.getElementById("fromTimeInput");
-  toTimeInput = document.getElementById("toTimeInput");
-  loadGridButton = document.getElementById("loadGridButton");
-  isPlaying = false;
-  audioQueue = [];
-  audioElement = null;
+    announcementContainer = document.getElementById("announcementContainer");
+    selectedRowsContainer = document.getElementById("selectedRowsContainer");
+    // Update the clock every second
+    setInterval(updateClock, 1000);
+    playButton = document.getElementById("playButton");
+    fromTimeInput = document.getElementById("fromTimeInput");
+    toTimeInput = document.getElementById("toTimeInput");
+    loadGridButton = document.getElementById("loadGridButton");
+    loadTrainButton = document.getElementById("loadTrainButton");
+    loadTrainInput = document.getElementById("loadTrainInput");
+    isPlaying = false;
+    audioQueue = [];
+    audioElement = null;
 
-  fetchAnnouncementData();
+    fetchAnnouncementData();
 
-  // Call the refreshData function every 10 seconds
-  refreshIntervalId = setInterval(refreshData, 10000);
-  loadGridButton.addEventListener("click", loadGridData);
-  playButton.addEventListener("click", togglePlay);
+    // Call the refreshData function every 10 seconds
+    refreshIntervalId = setInterval(refreshData, 10000);
+    loadGridButton.addEventListener("click", loadGridData);
+    playButton.addEventListener("click", togglePlay);
+    loadTrainButton.addEventListener("click", loadSelectedTrains); // New event listener
 });
