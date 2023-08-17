@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html>
 <body>
   <h1>Railway Platform Announcement System (MUG) - Version 1.0</h1>
@@ -17,6 +16,7 @@
 
   <p><strong>Note:</strong> This is Version 1.0 of the Railway Platform Announcement System (MUG), and future updates may include additional features and improvements.</p>
 
-  <p>Thank you for using the Railway Platform Announcement System (MUG)! Enjoy your train journey! 🚆🚄</p>
+  <p>Thank you for using the Railway Platform Announcement System (MUG)! Enjoy your train journey! 🚆🚄</p><br>
+  <p><strong>Link:</strong> https://infernal9999.github.io/RPA/</p>
 </body>
 </html>
