@@ -1,0 +1,44 @@
+body, h1, h2, h3, p, ul, li {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #ffd700;
+}
+
+.tab-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.tab {
+    cursor: pointer;
+    padding: 10px 20px;
+    margin-top: 40px;
+    background-color: #3498db;
+    color: white;
+    border-radius: 5px 5px 0 0;
+}
+
+.tab.active {
+    background-color: #2980b9;
+}
+
+.tab-content {
+    display: none;
+    padding: 0;
+    background-color: ffd700;
+    border-radius: 0 0 5px 5px;
+}
+
+iframe {
+	background-color: #ffd700;
+    width: 100%;
+    height: calc(100vh - 93px);
+    border: none;
+    margin: 0;
+}

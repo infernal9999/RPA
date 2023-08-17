@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Train Schedule Management</title>
+    <link rel="stylesheet" href="../styles/modify.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Train Schedule Management</h1>
+        <div class="actions">
+            <button id="addButton">Add Entry</button>
+            <button id="saveAllButton">Save All</button> <!-- Added Save All button -->
+        </div>
+        <div id="trainList" class="train-list"></div>
+    </div>
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Edit Train Entry</h2>
+            <textarea id="editTextarea"></textarea>
+            <button id="saveButton">Save</button>
+        </div>
+    </div>
+    <script src="../scripts/data.js"></script>
+    <script src="../scripts/modify.js"></script>
+</body>
+</html>

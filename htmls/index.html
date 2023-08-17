@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Railway Platform Announcement</title>
+    <link rel="stylesheet" href="../styles/styles.css">
+    <link rel="icon" href="../rpa.ico" type="image/x-icon">
+</head>
+<body>
+    <div class="tab-container">
+        <div class="tab active" onclick="openTab(event, 'rpaTab')">RPA</div>
+        <div class="tab" onclick="openTab(event, 'miscTab')">Miscellaneous</div>
+        <div class="tab" onclick="openTab(event, 'tsmTab')">TSM</div>
+    </div>
+
+    <div id="rpaTab" class="tab-content" style="display: block;">
+        <iframe id="rpaIframe" src="rpa.html" frameborder="0" height="100%"></iframe>
+    </div>
+
+    <div id="miscTab" class="tab-content">
+        <iframe id="miscIframe" src="misc.html" frameborder="0" height="100%"></iframe>
+    </div>
+
+    <div id="tsmTab" class="tab-content">
+        <iframe id="tsmIframe" src="modify.html" frameborder="0" height="100%"></iframe>
+    </div>
+
+    <script>
+        function openTab(evt, tabName) {
+            var i, tabContent, tabLinks;
+            tabContent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabContent.length; i++) {
+                tabContent[i].style.display = "none";
+            }
+            tabLinks = document.getElementsByClassName("tab");
+            for (i = 0; i < tabLinks.length; i++) {
+                tabLinks[i].className = tabLinks[i].className.replace(" active", "");
+            }
+            document.getElementById(tabName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+    </script>
+</body>
+</html>

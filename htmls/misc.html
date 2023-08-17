@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../styles/misc_styles.css">
+    <title>Miscellaneous</title>
+</head>
+<body>
+    <div class="container">
+        <h1 class="heading">Miscellaneous</h1>
+        
+        <div class="operation-type-container">
+            <label for="operationType" class="operation-type-label">Operation Type:</label>
+            <select id="operationType" class="operation-type-select">
+                <option value="Through">Through</option>
+                <option value="Arrival">Arrival</option>
+                <option value="Departure">Departure</option>
+                <option value="Movement">Movement</option>
+            </select>
+        </div>
+        
+        <div class="line-numbers-container">
+            <label for="lineCheckboxes">Line Number:</label>
+            <div id="lineCheckboxes" class="line-checkboxes"></div>
+        </div>
+        
+        <div class="language-container">
+            <label for="languageSelect" class="language-label">Language:</label>
+            <select id="languageSelect" class="language-select">
+                <option value="All">All</option>
+                <option value="English">English</option>
+                <option value="Hindi">Hindi</option>
+                <option value="Bengali">Bengali</option>
+            </select>
+        </div>
+        
+        <div class="play-counter-and-button">
+            <div class="play-counter-container">
+                <label for="playCounterInput" class="play-counter-label">Play Counter:</label>
+                <input type="number" id="playCounterInput" class="play-counter-input" min="1" max="10" value="1">
+            </div>
+            <button id="playButton" class="play-button">Play</button>
+        </div>
+    </div>
+    <script src="../scripts/misc.js"></script>
+</body>
+</html>
