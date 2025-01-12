@@ -312,13 +312,23 @@ function constructAudioFileName(language, trainData, platformNumber, status) {
   });
   var viaStations = trainData["Via"];
 
-  var audioFileNameArray = [
-    `${audioPath}/opening.mp3`,
-    ...trainDigits.map((digit) => `${audioPath}/numbers/${digit}.mp3`),
-    `${audioPath}/directions/${trainDirection}.mp3`,
-    `${audioPath}/stations/${station1}.mp3`,
-    ...trainTypeArray.map((type) => `${audioPath}/types/${type}.mp3`),
-  ];
+  // Assuming audioFileNameArray is defined as before
+var audioFileNameArray = [
+  `${audioPath}/opening.mp3`,
+  ...trainDigits.map((digit) => `${audioPath}/numbers/${digit}.mp3`),
+  `${audioPath}/directions/${trainDirection}.mp3`,
+  `${audioPath}/stations/${station1}.mp3`,
+  ...trainTypeArray.map((type) => `${audioPath}/types/${type}.mp3`),
+];
+
+// Create a paragraph element
+var paragraph = document.createElement("p");
+
+// Join the array values into a string, separating them by a comma or newline
+paragraph.textContent = audioFileNameArray.join(", "); // or "\n" for line breaks
+
+// Append the paragraph to the body or any other container element
+document.body.appendChild(paragraph);
 
   if (status === "Arriving") {
     if (viaStations && viaStations.length > 0) {
