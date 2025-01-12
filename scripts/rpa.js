@@ -306,7 +306,10 @@ function constructAudioFileName(language, trainData, platformNumber, status) {
   var trainNameParts = trainData["Train Name"].split("-");
   var station1 = trainNameParts[0].trim().toLowerCase();
   var station2 = trainNameParts[1].trim().toLowerCase();
-  var trainType = station2.split(" ")[1].toLowerCase();
+  //var trainType = station2.split(" ")[1].toLowerCase();
+  var trainType = station2.split(" ").map(function(word) {
+    return word.toLowerCase();
+  });
   var viaStations = trainData["Via"];
 
   var audioFileNameArray = [
@@ -314,8 +317,7 @@ function constructAudioFileName(language, trainData, platformNumber, status) {
     ...trainDigits.map((digit) => `${audioPath}/numbers/${digit}.mp3`),
     `${audioPath}/directions/${trainDirection}.mp3`,
     `${audioPath}/stations/${station1}.mp3`,
-    `${audioPath}/stations/${station2.split(" ")[0].toLowerCase()}.mp3`,
-    `${audioPath}/types/${trainType}.mp3`,
+    ...trainTypeArray.map((type) => `${audioPath}/types/${type}.mp3`),
   ];
 
   if (status === "Arriving") {
