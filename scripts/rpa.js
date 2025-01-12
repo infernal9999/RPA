@@ -306,29 +306,25 @@ function constructAudioFileName(language, trainData, platformNumber, status) {
   var trainNameParts = trainData["Train Name"].split("-");
   var station1 = trainNameParts[0].trim().toLowerCase();
   var station2 = trainNameParts[1].trim().toLowerCase();
-  //var trainType = station2.split(" ")[1].toLowerCase();
-  var trainType = station2.split(" ").map(function(word) {
-    return word.toLowerCase();
-  });
+
+// Assuming trainType is an array, remove the first element and convert the rest to lowercase
+var trainType = station2.split(" ").map(function(word) {
+  return word.toLowerCase();
+});
+
+// Remove the first element and assign it to station2
+station2 = trainType.shift();
+  
   var viaStations = trainData["Via"];
 
-  // Assuming audioFileNameArray is defined as before
-var audioFileNameArray = [
+  var audioFileNameArray = [
   `${audioPath}/opening.mp3`,
   ...trainDigits.map((digit) => `${audioPath}/numbers/${digit}.mp3`),
   `${audioPath}/directions/${trainDirection}.mp3`,
   `${audioPath}/stations/${station1}.mp3`,
-  ...trainTypeArray.map((type) => `${audioPath}/types/${type}.mp3`),
+   `${audioPath}/stations/${station2}.mp3`,
+  ...trainType.map((type) => `${audioPath}/types/${type}.mp3`), // Use trainType here
 ];
-
-// Create a paragraph element
-var paragraph = document.createElement("p");
-
-// Join the array values into a string, separating them by a comma or newline
-paragraph.textContent = audioFileNameArray.join(", "); // or "\n" for line breaks
-
-// Append the paragraph to the body or any other container element
-document.body.appendChild(paragraph);
 
   if (status === "Arriving") {
     if (viaStations && viaStations.length > 0) {
