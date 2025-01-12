@@ -250,8 +250,8 @@ const data = [
     "Schedule": "Everyday"
   },
   {
-    "Train No.": "03111",
-    "Train Name": "Sealdah - Godda Memu Special",
+    "Train No.": "63141",
+    "Train Name": "Sealdah - Godda Memu Passenger",
     "Time": "13:33",
     "Via": [
       "Magra",
@@ -339,8 +339,8 @@ const data = [
     "Schedule": "Everyday"
   },
   {
-    "Train No.": "03112",
-    "Train Name": "Godda - Sealdah MEMU Special",
+    "Train No.": "63142",
+    "Train Name": "Godda - Sealdah MEMU Passenger",
     "Time": "16:22",
     "Via": [],
     "Schedule": "Everyday"
